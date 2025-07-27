@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Spinner from './Spinner';
 
 const MovieDetails = () => {
@@ -8,6 +8,7 @@ const MovieDetails = () => {
     const [trailerUrl, setTrailerUrl] = useState('');
     const API_KEY = import.meta.env.VITE_OMDB_API_KEY;
     const YT_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
+
 
     useEffect(() => {
         const fetchMovieDetails = async () => {

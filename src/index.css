@@ -26,7 +26,7 @@
     font-optical-sizing: auto;
     background: #030014;
   }
-  
+
   h1 {
     @apply mx-auto max-w-4xl text-center text-5xl font-bold leading-tight tracking-[-1%] text-white sm:text-[64px] sm:leading-[76px];
   }
@@ -146,7 +146,7 @@
   }
 
   .movie-details {
-    @apply ml-10 mr-10 mt-2 sm:mt-4 md:mt-6 lg:mt-8 xl:mt-10 p-5 bg-dark-100 rounded-2xl shadow-inner shadow-light-100/10 border-2 border-red-500 relative;
+    @apply ml-2 sm:ml-4 md:ml-6 lg:ml-8 xl:ml-10 mr-2 sm:mr-4 md:mr-6 lg:mr-8 xl:mr-10 mt-2 sm:mt-4 md:mt-6 lg:mt-8 xl:mt-10 p-5 bg-dark-100 rounded-2xl shadow-inner shadow-light-100/10 border-2 border-red-500 relative;
 
     /* Red glowing effect */
     box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
