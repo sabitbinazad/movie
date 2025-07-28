@@ -4,13 +4,21 @@ import Spinner from './components/Spinner';
 import MovieCart from './components/MovieCart';
 import { useDebounce } from 'react-use'
 
+import { useSearchParams, useNavigate } from 'react-router-dom';
+
 const App = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  //const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('')
   const [errorMessage, setErrorMessage] = useState('');
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [defaultSearchUsed, setDefaultSearchUsed] = useState('');
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  const urlSearchTerm = searchParams.get('s') || '';
+  const [searchTerm, setSearchTerm] = useState(urlSearchTerm);
 
 
   // Debounce the search term to prevent making too many API requests
@@ -33,6 +41,12 @@ const App = () => {
     'marvel',
     'dc comics'
   ];
+
+  // When user types, wait 1s before triggering search
+  useDebounce(() => {
+    setDebouncedSearchTerm(searchTerm);
+    setSearchParams(searchTerm ? { s: searchTerm } : {}); // update URL
+  }, 100, [searchTerm]);
 
   // Pick a random default search term every time fetchMovies runs
   const fetchMovies = async () => {
@@ -77,6 +91,11 @@ const App = () => {
     fetchMovies();
   }, [debouncedSearchTerm]);
 
+  // when user types, update searchTerm state (and indirectly URL)
+  const handleSearchChange = (value) => {
+    setSearchTerm(value);
+  };
+
   return (
     <main>
       <div className='pattern' />
@@ -102,7 +121,7 @@ const App = () => {
           ) : (
             <ul>
               {movies.map((movie) =>
-                <MovieCart key={movie.id} movie={movie} />
+                <MovieCart key={movie.imdbID} movie={movie} />
 
               )}
             </ul>
